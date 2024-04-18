@@ -1,0 +1,56 @@
+# ===================================================================
+# Spring boot configuration for "qa" profile.
+#
+# This configuration overrides the application.yml file
+# ===================================================================
+
+logging:
+  level:
+    ROOT: INFO
+    com.hbo.smart: INFO
+
+server:
+  port: 9280
+
+# hbo common framework properties
+
+common:
+  rest:
+    client:
+      apis:
+        admin:
+          base-url: http://uxsmartapp01d:9290/
+          health-url: http://uxsmartapp01d:9290/api/admin/v1/health
+        affiliate-subscriber:
+          base-url: http://uxsmartapp01d:9291/
+          health-url: http://uxsmartapp01d:9291/api/affiliate-subscriber/v1/health
+        deal:
+          base-url: http://uxsmartapp01d:9292/
+          health-url: http://uxsmartapp01d:9292/api/deals-accrual/v1/health
+        billing:
+          base-url: http://uxsmartapp01d:9295/
+          health-url: http://uxsmartapp01d:9295/api/billing-invoice-service/v1/health
+        billing-engine:
+          base-url: http://uxsmartapp01d:9293/
+          health-url: http://uxsmartapp01d:9293/api/billing-invoice/v1/health
+        smart-webapp:
+          base-url: http://uxsmartapp01d:9280/
+          health-url: http://uxsmartapp01d:9280/health
+  web:
+    sso:
+      sp:
+        base-url: http://uxsmartapp01d:9280
+        metadata.entity-id: urn:com.hbo:smart:smart-web-app-devqa
+      idp.metadata.url: https://tw.oktapreview.com/app/exkpuzd8yi3lYKcmo0h7/sso/saml/metadata
+      logout.url: https://sso.homeboxoffice.com/sso/logout
+      default-success-target-url: /
+      membership-roles:
+        "*SMART Project Team":
+          - ROLE_ADMIN
+          - ROLE_USERS
+
+# spring properties
+
+spring:
+  resources:
+    cache-period: 31536000

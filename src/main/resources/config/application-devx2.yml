@@ -1,0 +1,58 @@
+# ===================================================================
+# Spring boot configuration for "devx" profile.
+#
+# This configuration overrides the application.yml file
+# ===================================================================
+
+# logging properties
+
+logging:
+  level:
+    ROOT: INFO
+    com.hbo.smart: INFO
+
+server:
+  port: 9380
+
+# hbo common framework properties
+
+common:
+  rest:
+    client:
+      apis:
+        admin:
+          base-url: http://croappsmartd:9390/
+          health-url: http://croappsmartd:9390/api/admin/v1/health
+        affiliate-subscriber:
+          base-url: http://croappsmartd:9391/
+          health-url: http://croappsmartd:9391/api/affiliate-subscriber/v1/health
+        deal:
+          base-url: http://croappsmartd:9392/
+          health-url: http://croappsmartd:9392/api/deals-accrual/v1/health
+        billing:
+          base-url: http://croappsmartd:9395/
+          health-url: http://croappsmartd:9395/api/billing-invoice-service/v1/health
+        billing-engine:
+          base-url: http://croappsmartd:9393/
+          health-url: http://croappsmartd:9393/api/billing-invoice/v1/health
+        smart-webapp:
+          base-url: http://croappsmartd:9380/
+          health-url: http://croappsmartd:9380/health
+  web:
+    sso:
+      sp:
+        base-url: http://croappsmartd:9380
+        metadata.entity-id: urn:com.hbo:smart:smart-web-app-devx
+      idp.metadata.url: https://twdev.oktapreview.com/app/exkj9adswnS7bVrBf0h7/sso/saml/metadata
+      logout.url: https://sso.homeboxoffice.com/sso/logout
+      default-success-target-url: /
+      membership-roles:
+        "*SMART Project Team":
+          - ROLE_ADMIN
+          - ROLE_USERS
+
+# spring properties
+
+spring:
+  resources:
+    cache-period: 31536000
